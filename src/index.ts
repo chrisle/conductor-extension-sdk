@@ -44,6 +44,17 @@ export interface NewTabMenuItem {
   separator?: 'before' | 'after'
 }
 
+/**
+ * A Claude Code skill bundled with an extension.
+ * Installed to ~/.claude/skills/conductor-<extensionId>-<slug>/SKILL.md on first run.
+ */
+export interface SkillDefinition {
+  /** Short slug — combined with the extension ID to form the installed name */
+  slug: string
+  /** Full SKILL.md content including frontmatter */
+  content: string
+}
+
 /** The extension definition — the default export of every extension bundle */
 export interface Extension {
   id: string
@@ -54,9 +65,13 @@ export interface Extension {
   sidebar?: ComponentType<{ groupId: string }>
   /** Optional settings panel rendered inside the Settings sidebar */
   settingsPanel?: ComponentType
+  /** Optional config panel shown when the user clicks "Configure" in the Extensions list */
+  configPanel?: ComponentType
   tabs?: TabRegistration[]
   newTabMenuItems?: NewTabMenuItem[]
   onActivate?: () => void
+  /** Claude Code skills to install for the user on first run */
+  skills?: SkillDefinition[]
 }
 
 /**
