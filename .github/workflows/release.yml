@@ -60,11 +60,12 @@ jobs:
         if: steps.check.outputs.exists == 'false'
         run: npm pack
 
-      - name: Publish to npm
-        if: steps.check.outputs.exists == 'false'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
+      # TODO: re-enable once NPM_TOKEN is configured in repo secrets.
+      # - name: Publish to npm
+      #   if: steps.check.outputs.exists == 'false'
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #   run: npm publish --access public
 
       - name: Create GitHub Release
         if: steps.check.outputs.exists == 'false'
